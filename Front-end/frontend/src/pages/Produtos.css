@@ -1,0 +1,247 @@
+/* ===========================
+   CONTAINER PRINCIPAL
+=========================== */
+.prod-container {
+  padding: 30px;
+  background: #f5f6fa;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.prod-top-header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+}
+
+.prod-top-header p {
+  margin-top: 4px;
+  color: #666;
+}
+
+/* ===========================
+   CARDS RESUMO
+=========================== */
+.prod-summary {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.summary-card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  border: 1px solid #e5e6eb;
+}
+
+.summary-card span {
+  font-size: 14px;
+  color: #777;
+}
+
+.summary-card h2 {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #222;
+}
+
+.summary-card .danger {
+  color: #d93025;
+}
+
+/* ===========================
+   BARRA DE BUSCA + BOTÃO
+=========================== */
+.prod-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.prod-actions input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  background: white;
+  transition: all 0.2s;
+}
+
+.prod-actions input:focus {
+  outline: none;
+  border-color: #0077ff;
+}
+
+.btn-add {
+  padding: 12px 18px;
+  background: #007bff;
+  border: none;
+  color: white;
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 18px;
+}
+
+.btn-add:hover {
+  background: #005fcc;
+}
+
+.barra-pesquisa {
+    color: black;
+}
+
+
+/* ===========================
+   TABELA
+=========================== */
+.prod-table-wrapper {
+  margin-top: 30px;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.prod-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prod-table thead {
+  background: #f0f2f5;
+}
+
+.prod-table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 2px solid #e1e1e1;
+}
+
+.prod-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  font-size: 15px;
+}
+
+.prod-table tr:hover {
+  background: #fafafa;
+}
+
+.sub {
+  color: #777;
+  font-size: 13px;
+}
+
+/* ===========================
+   TAGS
+=========================== */
+.tag {
+  background: #eef4ff;
+  color: #0053d6;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+/* ===========================
+   AÇÕES
+=========================== */
+/* ÍCONES (ação) */
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 98px;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+.btn-icon .icon {
+  width: 20px;
+  height: 20px;
+  color: #374151; /* cinza escuro elegante */
+}
+
+/* hover */
+.btn-icon.edit:hover .icon {
+  color: #2563eb; /* azul */
+}
+
+.btn-icon.view:hover .icon {
+  color: #16a34a; /* verde */
+}
+
+.btn-icon.delete:hover .icon {
+  color: #dc2626; /* vermelho */
+}
+
+
+/* ===========================
+   ESTOQUE BAIXO
+=========================== */
+.danger {
+  color: #d93025 !important;
+  font-weight: 600;
+}
+
+/* ===========================
+   LINHA VAZIA
+=========================== */
+.empty {
+  text-align: center;
+  padding: 30px !important;
+  color: #777;
+  font-size: 15px;
+}
+
+.prod-top-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.usuario-logado {
+  font-weight: 600;
+  color: #222;
+}
+
+.btn-logout {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  background: #b71c1c;
+}

@@ -1,5 +1,14 @@
 from rest_framework import serializers
 from .models import Produto, Movimentacao
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
 
 class ProdutoSerializer(serializers.ModelSerializer):
     estoque_baixo = serializers.ReadOnlyField()
@@ -16,3 +25,4 @@ class MovimentacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movimentacao
         fields = '__all__'
+        read_only_fields = ['responsavel']  # impede o front de enviar

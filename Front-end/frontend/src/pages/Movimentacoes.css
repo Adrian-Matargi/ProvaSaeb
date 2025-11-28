@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.prod-container {
+    padding: 30px;
+    background: #f5f6fa;
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+}
+
+.prod-top-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #222;
+}
+
+.prod-top-header p {
+    margin-top: 4px;
+    color: #666;
+}
+
+.prod-top-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.btn-add {
+    padding: 12px 18px;
+    background: #007bff;
+    border: none;
+    color: white;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-add:hover {
+    background: #005fcc;
+}
+
+/* Reaproveitar CSS de cadastro de produtos para formulário */
+.cadastro-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    margin-top: 20px;
+    max-width: 600px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 6px;
+    display: block;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-voltar {
+    background: #ddd;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-voltar:hover {
+    background: #ccc;
+}
+
+.btn-salvar {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.22s;
+}
+
+.btn-salvar:hover {
+    background: #1e4fcf;
+}
+
+/* Tabela */
+.prod-table-wrapper {
+    margin-top: 30px;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #e2e2e2;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.prod-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prod-table th, .prod-table td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    color: #333;
+}
+
+.prod-table thead th {
+    background: #f0f2f5;
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.prod-table tr:hover {
+    background: #fafafa;
+}
+
+.empty {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+}

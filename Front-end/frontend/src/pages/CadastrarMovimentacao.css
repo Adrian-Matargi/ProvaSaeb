@@ -1,0 +1,149 @@
+/* Fonte padrão da interface */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+/* Container principal */
+.cadastro-container {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f1f5f9; /* cinza mais limpo */
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+/* Card */
+.cadastro-card {
+  width: 950px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 45px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+}
+
+/* Título */
+.cadastro-card h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+/* Subtítulo */
+.cadastro-card p {
+  margin-bottom: 28px;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-bottom: 18px;
+  background: #fff;
+  outline: none;
+  color: #111;
+  transition: 0.2s;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* Foco */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+/* Mensagens */
+.cadastro-erro {
+  color: #dc2626;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.cadastro-sucesso {
+  color: #059669;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* Área dos botões */
+.cadastro-btns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Botão voltar */
+.btn-voltar {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.22s;
+}
+
+.btn-voltar:hover {
+  background: #d1d5db;
+}
+
+/* Botão salvar */
+.btn-salvar {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.22s;
+}
+
+.btn-salvar:hover {
+  background: #1e4fcf;
+}
+
+.btn-voltar {
+    background: #ddd;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.btn-voltar:hover {
+    background: #ccc;
+}

@@ -1,86 +1,211 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";
+import Header from "../components/Header"; // ajuste o caminho conforme sua pasta
+import { useNavigate } from "react-router-dom";
+import "./Produtos.css";
+import {
+  PencilSquareIcon,
+  EyeIcon,
+  TrashIcon
+} from "@heroicons/react/24/outline";
 
 export default function Produtos() {
-    const [produtos, setProdutos] = useState([]);
+  const [produtos, setProdutos] = useState([]);
+  const [search, setSearch] = useState("");
+  const [usuario, setUsuario] = useState("Usuário");
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        async function carregar() {
-            try {
-                const res = await api.get("produtos/");
-                setProdutos(res.data.results || []);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        carregar();
-    }, []);
+  // ---------------- FUNÇÃO LOGOUT ----------------
+  function logout() {
+    localStorage.clear();
+    navigate("/");
+  }
 
-    return (
-        <div className="p-8">
-            <h1 className="text-3xl font-bold mb-6 text-gray-800">
-                Produtos Cadastrados
-            </h1>
+  // ---------------- FUNÇÃO DELETAR ----------------
+  async function handleDelete(id) {
+    if (!window.confirm("Tem certeza que deseja excluir este produto?")) return;
 
-            {produtos.length === 0 && (
-                <p className="text-gray-600">Nenhum produto cadastrado.</p>
+    try {
+      const token = localStorage.getItem("access");
+
+      const response = await fetch(`http://localhost:8000/api/produtos/${id}/`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.ok) {
+        setProdutos((prev) => prev.filter((p) => p.id !== id));
+        alert("Produto excluído com sucesso!");
+      } else {
+        const errorData = await response.json();
+        console.log("Erro ao excluir produto:", errorData);
+        alert("Não foi possível excluir o produto.");
+      }
+    } catch (error) {
+      console.log("Erro ao excluir produto:", error);
+      alert("Erro ao excluir o produto.");
+    }
+  }
+
+  // ---------------- PEGAR NOME DO USUÁRIO ----------------
+useEffect(() => {
+  const token = localStorage.getItem("access");
+  if (token) {
+    try {
+      const payloadBase64 = token.split(".")[1]; // pega o payload
+      const payload = JSON.parse(atob(payloadBase64)); // decodifica base64
+      console.log("Payload do token:", payload); // 👉 veja no console qual campo contém o nome
+
+      // A propriedade que contem o username pode variar: username, nome, email...
+      setUsuario(payload.username || payload.nome || payload.email || "Usuário");
+    } catch (error) {
+      console.log("Erro ao decodificar token:", error);
+      setUsuario("Usuário");
+    }
+  } else {
+    setUsuario("Usuário");
+  }
+}, []);
+
+
+  // ---------------- CARREGAR PRODUTOS ----------------
+  useEffect(() => {
+    async function loadProdutos() {
+      try {
+        const token = localStorage.getItem("access");
+
+        const response = await fetch("http://localhost:8000/api/produtos/", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const data = await response.json();
+        if (Array.isArray(data)) setProdutos(data);
+        else if (Array.isArray(data.results)) setProdutos(data.results);
+        else setProdutos([]);
+      } catch (error) {
+        console.log("Erro ao carregar produtos", error);
+      }
+    }
+
+    loadProdutos();
+  }, []);
+
+  // ---------------- FILTRO DE BUSCA ----------------
+  const produtosFiltrados = produtos.filter(
+    (p) =>
+      p.nome.toLowerCase().includes(search.toLowerCase()) ||
+      p.categoria.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="prod-container">
+
+      <Header titulo="Sistema de Gerenciamento de Estoque" />
+
+      {/* ------------------- CARDS RESUMO ------------------- */}
+      <div className="prod-summary">
+        <div className="summary-card">
+          <span>Total de Produtos</span>
+          <h2>{produtos.length}</h2>
+        </div>
+
+        <div className="summary-card">
+          <span>Itens em Estoque</span>
+          <h2>{produtos.reduce((acc, p) => acc + p.quantidade_atual, 0)}</h2>
+        </div>
+
+        <div className="summary-card">
+          <span>Estoque Baixo</span>
+          <h2 className="danger">
+            {produtos.filter((p) => p.quantidade_atual <= p.estoque_minimo).length}
+          </h2>
+        </div>
+
+        <div className="summary-card">
+          <span>Categorias</span>
+          <h2>{new Set(produtos.map((p) => p.categoria)).size}</h2>
+        </div>
+      </div>
+
+      {/* ------------------- BARRA DE BUSCA + BOTÃO ------------------- */}
+      <div className="prod-actions">
+        <input
+          className="barra-pesquisa"
+          type="text"
+          placeholder="Buscar por nome, categoria..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <button
+          className="btn-add"
+          onClick={() => navigate("/cadastrar-produto")}
+        >
+          + Adicionar Produto
+        </button>
+      </div>
+
+      {/* ------------------- TABELA ------------------- */}
+      <div className="prod-table-wrapper">
+        <table className="prod-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Quantidade</th>
+              <th>Estoque Min.</th>
+              <th>Estado</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {produtosFiltrados.length === 0 && (
+              <tr>
+                <td colSpan="7" className="empty">
+                  Nenhum produto encontrado.
+                </td>
+              </tr>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {produtos.map((p) => (
-                    <div
-                        key={p.id}
-                        className="bg-white shadow-md rounded-xl p-5 border border-gray-200"
-                    >
-                        <h2 className="text-xl font-bold text-gray-800">
-                            {p.nome}
-                        </h2>
+            {produtosFiltrados.map((p) => (
+              <tr key={p.id}>
+                <td>{p.id}</td>
+                <td>
+                  <strong>{p.nome}</strong>
+                  <p className="sub">{p.descricao}</p>
+                </td>
+                <td>
+                  <span className="tag">{p.categoria}</span>
+                </td>
+                <td className={p.quantidade_atual <= p.estoque_minimo ? "danger" : ""}>
+                  {p.quantidade_atual}
+                </td>
+                <td>{p.estoque_minimo}</td>
+                <td>
+                  {p.quantidade_atual <= p.estoque_minimo ? (
+                    <span className="danger">Baixo ⚠</span>
+                  ) : (
+                    <span className="ok">OK</span>
+                  )}
+                </td>
+                <td className="acoes">
+                  <button className="btn-icon edit" onClick={() => navigate(`/editar-produto/${p.id}`)}>
+                    <PencilSquareIcon className="icon" />
+                  </button>
+                  <button className="btn-icon view" onClick={() => navigate(`/produto/${p.id}`)}>
+                    <EyeIcon className="icon" />
+                  </button>
+                  <button className="btn-icon delete" onClick={() => handleDelete(p.id)}>
+                    <TrashIcon className="icon" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
 
-                        <p className="text-sm text-gray-500 mb-3">
-                            Categoria: {p.categoria}
-                        </p>
-
-                        <p className="text-gray-700 text-sm mb-2">
-                            Estoque atual:{" "}
-                            <span
-                                className={`font-bold ${
-                                    p.estoque_baixo ? "text-red-600" : "text-green-600"
-                                }`}
-                            >
-                                {p.quantidade_atual}
-                            </span>
-                        </p>
-
-                        <p className="text-gray-500 text-sm mb-4">
-                            Mínimo: {p.estoque_minimo}
-                        </p>
-
-                        {/* BOTÕES */}
-                        <div className="flex justify-between mt-4">
-                            <a
-                                href={`/produto/${p.id}`}
-                                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm"
-                            >
-                                Ver
-                            </a>
-
-                            <a
-                                href={`/editar/${p.id}`}
-                                className="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg text-sm"
-                            >
-                                Editar
-                            </a>
-
-                            <a
-                                href={`/movimentar/${p.id}`}
-                                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm"
-                            >
-                                Movimentar
-                            </a>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+        </table>
+      </div>
+    </div>
+  );
 }

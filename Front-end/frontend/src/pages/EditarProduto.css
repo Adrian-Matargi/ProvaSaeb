@@ -1,0 +1,97 @@
+.edit-container {
+  max-width: 650px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.edit-container h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.edit-container .sub {
+  font-size: 15px;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.edit-form label {
+  font-weight: 600;
+  color: #333;
+}
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn-save {
+  background: #007bff;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-save:hover {
+  background: #005ec7;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #333;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #c3c3c3;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
